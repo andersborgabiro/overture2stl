@@ -2,6 +2,8 @@
 
 A Python application that converts Overture map data to a cohesive STL model.
 
+![IMG_20250511_093003-s](https://github.com/user-attachments/assets/c81e3633-2c0e-4e5e-a607-4f73b2dcbaba)
+
 ## Usage
 
 This is working code, that has generated consistent results for me, but still early such, so expect some rough edges.
