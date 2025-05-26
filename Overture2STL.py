@@ -527,16 +527,4 @@ if __name__ == "__main__":
         main(bbox, overture_types, polygon_height_mode, polygon_height, polygon_height_flat, line_width, line_height, point_width, point_height, base_margin, base_height, input_outputfile)
     else:
         print("Missing a file path!")
-
-        bbox=None,
-        overture_types=None, 
-        polygon_height_mode='f', 
-        polygon_height_default=3.0, 
-        polygon_height_flat_default=1.0, 
-        line_width_default=3.0, 
-        line_height_default=2.0, 
-        point_width_default=4.0, 
-        point_height_default=4.0, 
-        base_margin=10.0,
-        base_height=2.0,
-        output_stl_path=""   
+  
