@@ -472,8 +472,8 @@ if __name__ == "__main__":
         overture_types = None
 
     # Polygon height mode
-    polygon_height_mode_default = 'f'
-    input_height_mode = input("Mode for use of the height settings below: f(ixed), l(owest), h(ighest), e(xplicit) (f): ")
+    polygon_height_mode_default = 'e'
+    input_height_mode = input("Mode for use of the height settings below: f(ixed), l(owest), h(ighest), e(xplicit) (e): ")
     polygon_height_mode = input_height_mode.strip().lower()[0] if len(input_height_mode) > 0 else polygon_height_mode_default
     if polygon_height_mode not in ['f', 'l', 'h', 'e']:
         polygon_height_mode = polygon_height_mode_default
