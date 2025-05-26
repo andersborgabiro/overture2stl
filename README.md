@@ -10,7 +10,7 @@ This is working code, that has generated consistent results for me, but still ea
 
 Use https://boundingbox.klokantech.com/ to select the area to generate an STL for. Select CSV for the output, that is then entered into Overture2Stl.
 
-It uses https://docs.overturemaps.org/getting-data/overturemaps-py/ to download map data, so it needs to be accessible from where you run Overture2Stl. If nothing else works, copy overturemaps.exe there.
+It uses https://docs.overturemaps.org/getting-data/overturemaps-py/ to download map data, so it needs to be accessible from where you run Overture2Stl. If nothing else works, copy overturemaps.exe (Windows) there.
 
 Downloading data takes a rather long time, but once downloaded for a certain area (based on the name you give it) the files will be re-used unless you delete them.
 
