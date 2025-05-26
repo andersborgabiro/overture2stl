@@ -8,9 +8,11 @@ A Python application that converts Overture map data to a cohesive STL model.
 
 This is working code, that has generated consistent results for me, but still early such, so expect some rough edges.
 
-Use https://boundingbox.klokantech.com/ to select the area to generate an STL for. Select CSV for the output, that is then entered into Overture2Stl.
+Install the dependencies listed in requirements.txt.
 
-It uses https://docs.overturemaps.org/getting-data/overturemaps-py/ to download map data, so it needs to be accessible from where you run Overture2Stl. If nothing else works, copy overturemaps.exe (Windows) there.
+Install https://docs.overturemaps.org/getting-data/overturemaps-py/ that is used to download map data from within the application, so it needs to be accessible from where you run Overture2Stl. If nothing else works, copy overturemaps.exe (Windows) there.
+
+Use https://boundingbox.klokantech.com/ to select the area to generate an STL for. Select CSV for the output, that is then entered into Overture2Stl.
 
 Downloading data takes a rather long time, but once downloaded for a certain area (based on the name you give it) the files will be re-used unless you delete them.
 
