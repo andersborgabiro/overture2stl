@@ -1,5 +1,6 @@
-User: Please provide an explanation of the content of each Overture map type from a real world point of view. Those I know of are "address","building","building_part","division","division_area","division_boundary","places","segment","connector","bathymetry","infrastructure","land","land_cover","land_use","water"
-Assistant: Certainly! Overture Maps Foundation provides open map data in a set of standardized layers, each called a "map type." Here’s an explanation of the real-world meaning and content of each map type you listed, based on Overture’s documentation and general mapping concepts:
+(provided by GPT-4.1)
+
+Overture Maps Foundation provides open map data in a set of standardized layers, each called a "map type." Here’s an explanation of the real-world meaning and content of each map type you listed, based on Overture’s documentation and general mapping concepts:
 
 ---
 
@@ -184,4 +185,3 @@ Bodies of water on the Earth’s surface, such as oceans, lakes, rivers, and res
 - [Overture Maps Documentation](https://docs.overturemaps.org/)
 - General GIS and mapping knowledge
 
-If you need more detail on any specific map type, let me know!
