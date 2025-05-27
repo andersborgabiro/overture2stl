@@ -1,7 +1,7 @@
 geojson==3.2.0
-numpy==2.2.5
+numpy==2.2.6
 numpy_stl==3.2.0
 pyproj==3.7.1
-Shapely==2.1.0
+Shapely==2.1.1
 stl==0.0.3
 trimesh==4.6.8
