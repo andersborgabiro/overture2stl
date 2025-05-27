@@ -1,4 +1,4 @@
-# Overture2Stl
+# Overture2STL
 
 A Python application that converts Overture map data to a cohesive STL model.
 
