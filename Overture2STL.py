@@ -12,7 +12,6 @@ from shapely.geometry import shape, box, Polygon
 from shapely.ops import unary_union, transform
 from shapely.validation import explain_validity
 from pyproj import Transformer
-from pyproj import CRS
 import numpy as np
 import trimesh
 from shapely.geometry import LineString, Polygon
@@ -22,9 +21,9 @@ import os
 
 transformer = None
 
-default_types = ["building", "building_part", "infrastructure", "segment", "water"]
+map_types_default = ["building", "building_part", "infrastructure", "segment", "water"]
 
-all_types = [
+map_types_all = [
     "address",
     "building",
     "building_part",
@@ -226,7 +225,7 @@ def get_overture_geojson(type_name, bbox, cache_prefix):
 
 def main(
     bbox=None,
-    overture_types=None,
+    overture_types=map_types_default,
     polygon_height_mode="f",
     polygon_height_default=3.0,
     polygon_height_flat_default=1.0,
@@ -240,11 +239,6 @@ def main(
 ):
 
     global transformer
-    global default_types
-
-    # Default Overture types
-    if overture_types is None:
-        overture_types = default_types
 
     # Log of geometries
     csv_file = open(output_stl_path + ".csv", mode="w", newline="")
@@ -580,16 +574,18 @@ if __name__ == "__main__":
     bbox = [float(x.strip()) for x in input_bbox.split(",")]
 
     # Overture types
-    types_list = ", ".join(default_types)
+    types_list = ", ".join(map_types_default)
     overture_types_input = input(
         f"Comma-separated Overture types to download ({types_list}): "
     ).strip()
     if overture_types_input != "":
         overture_types = [
-            t.strip() for t in overture_types_input.split(",") if t.strip()
+            t.strip()
+            for t in overture_types_input.split(",")
+            if t.strip() and t.strip() in map_types_all
         ]
     else:
-        overture_types = None
+        overture_types = map_types_default
 
     # Polygon height mode
     polygon_height_mode_default = "e"
