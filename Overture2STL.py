@@ -18,11 +18,14 @@ from shapely.geometry import LineString, Polygon
 from shapely.affinity import rotate as shapely_rotate
 import csv
 import os
+from libs.cli import download
 
 transformer = None
 
+# Default map types to use
 map_types_default = ["building", "building_part", "infrastructure", "segment", "water"]
 
+# All possible map types
 map_types_all = [
     "address",
     "building",
@@ -40,6 +43,26 @@ map_types_all = [
     "land_use",
     "water",
 ]
+
+# Map map type to theme
+map_types_theme = {
+    "address": "addresses",
+    "bathymetry": "base",
+    "building": "buildings",
+    "building_part": "buildings",
+    "division": "divisions",
+    "division_area": "divisions",
+    "division_boundary": "divisions",
+    "place": "places",
+    "segment": "transportation",
+    "connector": "transportation",
+    "infrastructure": "base",
+    "land": "base",
+    "land_cover": "base",
+    "land_use": "base",
+    "water": "base",
+}
+
 
 # Widths of roads in meters
 # https://github.com/OvertureMaps/schema/blob/dev/schema/transportation/segment.yaml
@@ -204,6 +227,7 @@ def rotate_vertices(vertices, angle_deg):
 
 
 # Download Overture data for a given type and bbox, save to file if not cached
+# Use Overture Maps CLI executable for downloading data
 def get_overture_geojson(type_name, bbox, cache_prefix):
     filename = f"{cache_prefix} - {type_name}.geojson"
 
@@ -219,7 +243,27 @@ def get_overture_geojson(type_name, bbox, cache_prefix):
     if result == 0:
         return filename
     else:
-        print(f"Failed fetching '{filename}'!")
+        print(f"Failed fetching '{filename}': {result}")
+        return None
+
+
+# Download Overture data for a given type and bbox, save to file if not cached
+# Use Overture Maps CLI source for downloading data
+def get_overture_geojson_direct(type_name, bbox, cache_prefix):
+    filename = f"{cache_prefix} - {type_name}.geojson"
+
+    # Use cached GeoJSON if exists
+    if os.path.exists(filename):
+        print(f"Using cached '{filename}'")
+        return filename
+
+    # Fetch GeoJSON
+    print(f"Fetching '{filename}'")
+    try:
+        download(bbox, "geojson", filename, type_name)
+        return filename
+    except Exception as e:
+        print(f"Failed fetching '{filename}': {e}")
         return None
 
 
@@ -279,7 +323,7 @@ def main(
     # Download or load cached geojson for each type
     geojson_files = []
     for type_name in overture_types:
-        geojson_file = get_overture_geojson(type_name, bbox, output_stl_path)
+        geojson_file = get_overture_geojson_direct(type_name, bbox, output_stl_path)
         if geojson_file is not None:
             geojson_files.append(geojson_file)
 
