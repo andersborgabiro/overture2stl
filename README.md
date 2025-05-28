@@ -10,7 +10,7 @@ This is working code, that has generated consistent results for me, but still ea
 
 Install the dependencies listed in requirements.txt.
 
-This is now optional, as data is accessed directly from the Overture Maps data store:
+This is now optional, as data is accessed directly from the Overture Maps data store by embedding a slightly modified variant of the Overture Maps CLI source code:
 ~~Install https://docs.overturemaps.org/getting-data/overturemaps-py/ that is used to download map data from within the application, so it needs to be accessible from where you run Overture2STL. If nothing else works, copy overturemaps.exe (Windows) there.~~
 
 Use https://boundingbox.klokantech.com/ to select the area to generate an STL for. Select CSV for the output, that is then entered into Overture2STL.
