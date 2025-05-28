@@ -23,3 +23,9 @@ Some areas contain lots of more or less irrelevant points that Overture2Stl will
 Be aware that STLs are dimension-less. Overture2Stl uses meters that all (?) slicers will treat as millimeters. Often that's good enough, but expect to have to scale down larger areas. Take that into account when you set the different dimensions.
 
 Experiment / Iterate :)!
+
+## References
+
+- [Overture Maps Foundation](https://overturemaps.org/)
+- [Overture Maps Documentation](https://docs.overturemaps.org/)
+
