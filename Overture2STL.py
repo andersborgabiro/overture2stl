@@ -24,6 +24,24 @@ transformer = None
 
 default_types = ["building", "building_part", "infrastructure", "segment", "water"]
 
+all_types = [
+    "address",
+    "building",
+    "building_part",
+    "division",
+    "division_area",
+    "division_boundary",
+    "places",
+    "segment",
+    "connector",
+    "bathymetry",
+    "infrastructure",
+    "land",
+    "land_cover",
+    "land_use",
+    "water",
+]
+
 # Widths of roads in meters
 # https://github.com/OvertureMaps/schema/blob/dev/schema/transportation/segment.yaml
 road_widths = {
@@ -198,9 +216,12 @@ def get_overture_geojson(type_name, bbox, cache_prefix):
     # Fetch GeoJSON, assuming OvertureMaps is installed
     print(f"Fetching '{filename}'")
     command = f'overturemaps download --bbox={bbox[0]},{bbox[1]},{bbox[2]},{bbox[3]} -f geojson --type="{type_name}" -o "{filename}"'
-    os.system(command)
-
-    return filename
+    result = os.system(command)
+    if result == 0:
+        return filename
+    else:
+        print(f"Failed fetching '{filename}'!")
+        return None
 
 
 def main(
@@ -265,7 +286,8 @@ def main(
     geojson_files = []
     for type_name in overture_types:
         geojson_file = get_overture_geojson(type_name, bbox, output_stl_path)
-        geojson_files.append(geojson_file)
+        if geojson_file is not None:
+            geojson_files.append(geojson_file)
 
     for input_geojson_path in geojson_files:
         print("Processing " + input_geojson_path)
