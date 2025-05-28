@@ -30,3 +30,6 @@ Experiment / Iterate :)!
 - [Overture Maps Foundation](https://overturemaps.org/)
 - [Overture Maps Documentation](https://docs.overturemaps.org/)
 
+## Attribution
+
+Slightly modified source code from [Overture Maps CLI](https://github.com/OvertureMaps/overturemaps-py) is used (the files under libs).
