@@ -6,22 +6,19 @@ A Python application that converts Overture map data to a cohesive STL model.
 
 ## Usage
 
-This is working code, that has generated consistent results for me, but still early such, so expect some rough edges.
+This is working code, that has generated consistent results for me, but still early such, so expect some rough edges. Especially the Streamlit (SL) version needs more work to become user-friendly/logical.
 
 Install the dependencies listed in requirements.txt.
 
-This is now optional, as data is accessed directly from the Overture Maps data store by embedding a slightly modified variant of the Overture Maps CLI source code:
-~~Install https://docs.overturemaps.org/getting-data/overturemaps-py/ that is used to download map data from within the application, so it needs to be accessible from where you run Overture2STL. If nothing else works, copy overturemaps.exe (Windows) there.~~
+For CLI: Use https://boundingbox.klokantech.com/ to select the area to generate an STL for. Select CSV for the output, that is then entered into Overture2STL-CLI.
 
-Use https://boundingbox.klokantech.com/ to select the area to generate an STL for. Select CSV for the output, that is then entered into Overture2STL.
+Downloading data takes a rather long time, but once downloaded for a certain area (based on the bounding box) the generated files will be re-used unless you delete them.
 
-Downloading data takes a rather long time, but once downloaded for a certain area (based on the name you give it) the generated files will be re-used unless you delete them.
-
-You adjust what types of data are included by adding to or removing from the default Overture types list. Of note, segment contains all roads, paths etc.
+You adjust what types of data are included by adding to or removing from the Overture map types. See "Overture map types explained" for information about what they contain.
 
 Some areas contain lots of more or less irrelevant points that Overture2Stl will render as small cylinders. To avoid them altogether set the point-related dimensions to 0.
 
-Be aware that STLs are dimension-less. Overture2Stl uses meters that all (?) slicers will treat as millimeters. Often that's good enough, but expect to have to scale down larger areas. Take that into account when you set the different dimensions.
+Be aware that STLs are dimension-less. Overture2Stl uses meters that all (?) slicers will treat as millimeters. Often that's good enough, but expect to have to scale down larger areas. Take that into account when you set the scaling factor and  different dimensions.
 
 Experiment / Iterate :)!
 
@@ -32,4 +29,4 @@ Experiment / Iterate :)!
 
 ## Attribution
 
-Slightly modified source code from [Overture Maps CLI](https://github.com/OvertureMaps/overturemaps-py) is used (the files under libs).
+Slightly modified source code from [Overture Maps CLI](https://github.com/OvertureMaps/overturemaps-py) is used (core.py and cli.py under libs).
