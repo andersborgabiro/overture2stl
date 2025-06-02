@@ -6,13 +6,15 @@ import pyarrow.dataset as ds
 import pyarrow.fs as fs
 
 # Allows for optional import of additional dependencies
-try: 
+try:
     import geopandas as gpd
     from geopandas import GeoDataFrame
+
     HAS_GEOPANDAS = True
 except ImportError:
     HAS_GEOPANDAS = False
     GeoDataFrame = None
+
 
 def record_batch_reader(overture_type, bbox=None) -> Optional[pa.RecordBatchReader]:
     """
@@ -48,7 +50,10 @@ def record_batch_reader(overture_type, bbox=None) -> Optional[pa.RecordBatchRead
     reader = pa.RecordBatchReader.from_batches(geoarrow_schema, non_empty_batches)
     return reader
 
-def geodataframe(overture_type: str, bbox: (float, float, float, float) = None) -> GeoDataFrame:
+
+def geodataframe(
+    overture_type: str, bbox: (float, float, float, float) = None
+) -> GeoDataFrame:
     """
     Loads geoparquet for specified type into a geopandas dataframe
 
@@ -67,6 +72,7 @@ def geodataframe(overture_type: str, bbox: (float, float, float, float) = None) 
 
     reader = record_batch_reader(overture_type, bbox)
     return gpd.GeoDataFrame.from_arrow(reader)
+
 
 def geoarrow_schema_adapter(schema: pa.Schema) -> pa.Schema:
     """
@@ -125,7 +131,8 @@ def _dataset_path(overture_type: str) -> str:
     # complete s3 path. Could be discovered by reading from the top-level s3
     # location but this allows to only read the files in the necessary partition.
     theme = type_theme_map[overture_type]
-    return f"overturemaps-us-west-2/release/2025-03-19.0/theme={theme}/type={overture_type}/"
+    # return f"overturemaps-us-west-2/release/2025-03-19.0/theme={theme}/type={overture_type}/"
+    return f"overturemaps-us-west-2/release/2025-05-21.0/theme={theme}/type={overture_type}/"
 
 
 def get_all_overture_types() -> List[str]:

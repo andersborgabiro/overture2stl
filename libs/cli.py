@@ -5,6 +5,7 @@ Currently provides the ability to extract features from an Overture dataset in a
 specified bounding box in a few different file formats.
 
 """
+
 import json
 import os
 import sys
@@ -17,7 +18,7 @@ import pyarrow.fs as fs
 import pyarrow.parquet as pq
 import shapely.wkb
 
-from . core import record_batch_reader, get_all_overture_types
+from .core import record_batch_reader, get_all_overture_types
 
 
 def get_writer(output_format, path, schema):
@@ -160,4 +161,3 @@ class GeoJSONWriter(BaseGeoJSONWriter):
 
     def finalize(self):
         self.writer.write("]}")
-
