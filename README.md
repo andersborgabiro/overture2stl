@@ -6,7 +6,7 @@ A Python application that converts Overture map data to a cohesive STL model.
 
 ## Usage
 
-This is working code, that has generated consistent results for me, but still early such, so expect some rough edges. Especially the Streamlit (SL) version needs more work to become user-friendly/logical.
+This is working code, that has generated consistent results for me, but still early such, so expect some rough edges.
 
 Install the dependencies listed in requirements.txt.
 
