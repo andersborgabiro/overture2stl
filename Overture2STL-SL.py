@@ -13,9 +13,29 @@ from libs.Overture2STL import (
     overture_to_stl,
 )
 
-st.set_page_config(page_title="Overture to STL", layout="wide")
+# Must be called first
+st.set_page_config(page_title="Overture to STL", page_icon="🗺", layout="centered", initial_sidebar_state="collapsed")
 
 st.title("🗺 Overture to STL Generator")
+
+# Styling got fixing height issue with Folium
+custom_css = """
+<style>
+.map-container {
+    height: 500px !important;
+    width: 100%;
+    overflow: hidden;
+}
+.map-container > * {
+    height: 100% !important;
+}
+iframe {
+    height: 500px !important;
+}
+</style>
+"""
+
+st.markdown(custom_css, unsafe_allow_html=True)
 
 # Bounding Box
 st.header("Bounding Box")
@@ -40,18 +60,8 @@ m = folium.Map(
     zoom_start=14,
     tiles="OpenStreetMap",
     width="100%",
-    height="500px",
+    height=500,
 )
-
-# Add rectangle if bbox is set (show selection on reload)
-if False:
-    if bbox:
-        folium.Rectangle(
-            bounds=[[bbox[1], bbox[0]], [bbox[3], bbox[2]]],
-            color="blue",
-            fill=True,
-            fill_opacity=0.2,
-        ).add_to(m)
 
 Draw(
     export=False,
@@ -66,7 +76,7 @@ Draw(
     edit_options={"edit": True, "remove": True},
 ).add_to(m)
 
-map_data = st_folium(m, height="500px", width="100%")
+map_data = st_folium(m, height=500, width="100%")
 
 #st.write(map_data)
 
@@ -117,26 +127,26 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     polygon_height = st.number_input(
-        "Default or limit height for buildings (m)",
+        "Default/limit height for buildings (m)",
         min_value=0.0,
         value=3.0,
         step=0.1,
     )
     polygon_height_flat = st.number_input(
-        "Default or limit height for flat areas (m)",
+        "Default/limit height for flat areas (m)",
         min_value=0.0,
         value=1.0,
         step=0.1,
     )
     line_width = st.number_input(
-        "Default or limit width for lines (m)",
+        "Default/limit width for lines (m)",
         min_value=0.0,
         value=3.0,
         step=0.1,
     )
 with col2:
     line_height = st.number_input(
-        "Default or limit height for lines (m)",
+        "Default/limit height for lines (m)",
         min_value=0.0,
         value=2.0,
         step=0.1,
@@ -179,7 +189,7 @@ outputfile = st.text_input(
     "File name for generated files (without extension)", value=""
 )
 
-if "perform" in st.session_state and st.session_state["perform"]:
+if "perform" in st.session_state and st.session_state["perform"]:   
     with st.spinner("Generating STL...", show_time=True):
         try:
             overture_to_stl(
@@ -198,14 +208,12 @@ if "perform" in st.session_state and st.session_state["perform"]:
                 outputfile,
             )
 
-            st.success(
-                f"STL and CSV files generated as '{outputfile}.stl' and '{outputfile}.csv'."
-            )
-            st.info("Check your working directory for the files.")
+            st.success(f"'{outputfile}.stl' was generated successfully.")
+            st.info("Check your working directory for the file.")
         except Exception as e:
-            st.error(f"Error: {e}")
+            st.error(f"Something went wrong when generating the STL file: {e}")
 
-    st.session_state["perform"] = False
+        st.session_state["perform"] = False 
 
 # --- Generate STL Button ---
 if st.button("Generate STL"):
@@ -216,6 +224,6 @@ if st.button("Generate STL"):
     elif not selected_types:
         st.error("Please select at least one map type.")
     else:
-        st.session_state["perform"] = True
+        st.session_state["perform"] = True     
 
 st.caption("Powered by Overture2STL by Abiro 2025, licensed under the MIT License.")
